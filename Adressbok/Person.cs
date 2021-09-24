@@ -28,8 +28,7 @@ namespace Adressbok
         //Metoden override:ar till stängvärde
         public override string ToString()
         {
-            string nyKontakt = Namn + " " + Gatuadress + " " + Postnummer + " " + Postort + " " + Telefon + " " + Epost +
-                Environment.NewLine;
+            string nyKontakt = Namn + " " + Gatuadress + " " + Postnummer + " " + Postort + " " + Telefon + " " + Epost;
             return nyKontakt;
         }
     }

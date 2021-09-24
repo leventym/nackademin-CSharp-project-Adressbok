@@ -9,67 +9,197 @@ namespace Adressbok
 {
     class Prompt
     {
+        //Skapa ny kontakt
         public static Person ShowDialog(string text, string caption)
         {
             Person person = new Person();
 
             Form prompt = new Form();
-            prompt.Width = 1000;
-            prompt.Height = 700;
+            prompt.Width = 600;
+            prompt.Height = 800;
             prompt.Text = caption;
 
             //Namn label
-            Label LabelNamn = new Label() { Left = 50, Top = 20, Text = text };
-            TextBox inputNamn = new TextBox() { Left = 50, Top = 50, Width = 400 };
+            TextBox inputNamn = new TextBox() { Left = 55, Top = 50, Width = 400 };
             inputNamn.PlaceholderText = "Namn";
 
             //Gatuadress label
-            Label LabelGatuadress = new Label() { Left = 50, Top = 20, Text = text };
-            TextBox inputGatuadress = new TextBox() { Left = 50, Top = 100, Width = 400 };
+            TextBox inputGatuadress = new TextBox() { Left = 55, Top = 150, Width = 400 };
+            inputGatuadress.PlaceholderText = "Gatuadress";
 
             //Postnummer label
-            Label LabelPostnummer = new Label() { Left = 50, Top = 20, Text = text };
-            TextBox inputPostnummer = new TextBox() { Left = 50, Top = 150, Width = 400 };
+            TextBox inputPostnummer = new TextBox() { Left = 55, Top = 250, Width = 400 };
+            inputPostnummer.PlaceholderText = "Postnummer";
 
             //Postort label
-            Label LabelPostort = new Label() { Left = 50, Top = 20, Text = text };
-            TextBox inputPostort = new TextBox() { Left = 50, Top = 200, Width = 400 };
+            TextBox inputPostort = new TextBox() { Left = 55, Top = 350, Width = 400 };
+            inputPostort.PlaceholderText = "Postort";
 
             //Telefon label
-            Label LabelTelefon = new Label() { Left = 50, Top = 20, Text = text };
-            TextBox inputTelefon = new TextBox() { Left = 50, Top = 250, Width = 400 };
+            TextBox inputTelefon = new TextBox() { Left = 55, Top = 450, Width = 400 };
+            inputTelefon.PlaceholderText = "Telefon";
 
             //Epost label
-            Label LabelEpost = new Label() { Left = 50, Top = 20, Text = text };
-            TextBox inputEpost = new TextBox() { Left = 50, Top = 300, Width = 400 };
+            TextBox inputEpost = new TextBox() { Left = 55, Top = 550, Width = 400 };
+            inputEpost.PlaceholderText = "Epost";
 
 
-            Button confirmation = new Button() { Text = "Spara", Left = 350, Height = 60, Width = 100, Top = 400 };
+            Button confirmation = new Button() { Text = "Spara", Left = 350, Height = 60, Width = 100, Top = 620 };
             confirmation.Click += (sender, e) => { prompt.Close(); };
             prompt.Controls.Add(confirmation);
 
+            Button cancellation = new Button() { Text = "Avbryt", Left = 200, Height = 60, Width = 100, Top = 620 };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+
+
             //Namn
-            prompt.Controls.Add(LabelNamn);
             prompt.Controls.Add(inputNamn);
 
             //Gatuadress
-            prompt.Controls.Add(LabelGatuadress);
             prompt.Controls.Add(inputGatuadress);
 
             //Postnummer
-            prompt.Controls.Add(LabelPostnummer);
             prompt.Controls.Add(inputPostnummer);
 
             //Postort
-            prompt.Controls.Add(LabelPostort);
             prompt.Controls.Add(inputPostort);
 
             //Telefon
-            prompt.Controls.Add(LabelTelefon);
             prompt.Controls.Add(inputTelefon);
 
             //Epost
-            prompt.Controls.Add(LabelEpost);
+            prompt.Controls.Add(inputEpost);
+
+            prompt.ShowDialog();
+
+            //Tilldelar inputvärdet från formuläret till objektet person.
+            //Om inputvärdet är tomt får fältet bindestreck "-".
+            if(inputNamn.Text == "")
+            {
+                person.Namn = "-";
+            }
+            else
+            {
+                person.Namn = inputNamn.Text;
+            }
+
+            if (inputGatuadress.Text == "")
+            {
+                person.Gatuadress = "-";
+            }
+            else
+            {
+                person.Gatuadress = inputGatuadress.Text;
+            }
+
+            if (inputPostnummer.Text == "")
+            {
+                person.Postnummer = "-";
+            }
+            else
+            {
+                person.Postnummer = inputPostnummer.Text;
+            }
+
+            if (inputPostort.Text == "")
+            {
+                person.Postort = "-";
+            }
+            else
+            {
+                person.Postort = inputPostort.Text;
+            }
+
+            if (inputTelefon.Text == "")
+            {
+                person.Telefon = "-";
+            }
+            else
+            {
+                person.Telefon = inputTelefon.Text;
+            }
+
+            if (inputEpost.Text == "")
+            {
+                person.Epost = "-";
+            }
+            else
+            {
+                person.Epost = inputEpost.Text;
+            }
+
+            return person;
+        }
+
+        //Redigera existerande kontakt
+        public static Person ShowDialogEdit(string namn, string gatuadress, string postnummer,
+            string postort, string telefon, string epost)
+        {
+            Person person = new Person();
+
+            Form prompt = new Form();
+            prompt.Width = 600;
+            prompt.Height = 800;
+            prompt.Text = "Redigera kontakt";
+
+            //Namn label
+            TextBox inputNamn = new TextBox() { Left = 55, Top = 50, Width = 400 };
+            inputNamn.PlaceholderText = "Namn";
+            inputNamn.Text = namn;
+
+            //Gatuadress label
+            TextBox inputGatuadress = new TextBox() { Left = 55, Top = 150, Width = 400 };
+            inputGatuadress.PlaceholderText = "Gatuadress";
+            inputGatuadress.Text = gatuadress;
+
+            //Postnummer label
+            TextBox inputPostnummer = new TextBox() { Left = 55, Top = 250, Width = 400 };
+            inputPostnummer.PlaceholderText = "Postnummer";
+            inputPostnummer.Text = postnummer;
+
+
+            //Postort label
+            TextBox inputPostort = new TextBox() { Left = 55, Top = 350, Width = 400 };
+            inputPostort.PlaceholderText = "Postort";
+            inputPostort.Text = postort;
+
+            //Telefon label
+            TextBox inputTelefon = new TextBox() { Left = 55, Top = 450, Width = 400 };
+            inputTelefon.PlaceholderText = "Telefon";
+            inputTelefon.Text = telefon;
+
+            //Epost label
+            TextBox inputEpost = new TextBox() { Left = 55, Top = 550, Width = 400 };
+            inputEpost.PlaceholderText = "Epost";
+            inputEpost.Text = epost;
+
+
+
+            Button confirmation = new Button() { Text = "Spara", Left = 350, Height = 60, Width = 100, Top = 620 };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(confirmation);
+
+            Button cancellation = new Button() { Text = "Avbryt", Left = 200, Height = 60, Width = 100, Top = 620 };
+            cancellation.Click += (sender, e) => { prompt.Dispose(); };
+            prompt.Controls.Add(cancellation);
+
+
+            //Namn
+            prompt.Controls.Add(inputNamn);
+
+            //Gatuadress
+            prompt.Controls.Add(inputGatuadress);
+
+            //Postnummer
+            prompt.Controls.Add(inputPostnummer);
+
+            //Postort
+            prompt.Controls.Add(inputPostort);
+
+            //Telefon
+            prompt.Controls.Add(inputTelefon);
+
+            //Epost
             prompt.Controls.Add(inputEpost);
 
             prompt.ShowDialog();
@@ -83,6 +213,8 @@ namespace Adressbok
             person.Epost = inputEpost.Text;
 
             return person;
+
+
         }
     }
 }

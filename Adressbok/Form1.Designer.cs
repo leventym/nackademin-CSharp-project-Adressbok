@@ -35,12 +35,12 @@ namespace Adressbok
             this.textBoxPostort = new System.Windows.Forms.TextBox();
             this.buttonAndra = new System.Windows.Forms.Button();
             this.buttonTabort = new System.Windows.Forms.Button();
-            this.listAdress = new System.Windows.Forms.ListView();
             this.buttonSok = new System.Windows.Forms.Button();
             this.buttonSkapa = new System.Windows.Forms.Button();
             this.buttonRensa = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.listAdress = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // labelNamn
@@ -65,14 +65,14 @@ namespace Adressbok
             // 
             this.textBoxNamn.Location = new System.Drawing.Point(133, 97);
             this.textBoxNamn.Name = "textBoxNamn";
-            this.textBoxNamn.Size = new System.Drawing.Size(648, 39);
+            this.textBoxNamn.Size = new System.Drawing.Size(809, 39);
             this.textBoxNamn.TabIndex = 6;
             // 
             // textBoxPostort
             // 
             this.textBoxPostort.Location = new System.Drawing.Point(133, 174);
             this.textBoxPostort.Name = "textBoxPostort";
-            this.textBoxPostort.Size = new System.Drawing.Size(647, 39);
+            this.textBoxPostort.Size = new System.Drawing.Size(809, 39);
             this.textBoxPostort.TabIndex = 9;
             // 
             // buttonAndra
@@ -83,6 +83,7 @@ namespace Adressbok
             this.buttonAndra.TabIndex = 12;
             this.buttonAndra.Text = "Ändra";
             this.buttonAndra.UseVisualStyleBackColor = true;
+            this.buttonAndra.Click += new System.EventHandler(this.buttonAndra_Click);
             // 
             // buttonTabort
             // 
@@ -92,29 +93,21 @@ namespace Adressbok
             this.buttonTabort.TabIndex = 13;
             this.buttonTabort.Text = "Ta bort";
             this.buttonTabort.UseVisualStyleBackColor = true;
-            // 
-            // listAdress
-            // 
-            this.listAdress.HideSelection = false;
-            this.listAdress.Location = new System.Drawing.Point(27, 322);
-            this.listAdress.Name = "listAdress";
-            this.listAdress.Size = new System.Drawing.Size(753, 570);
-            this.listAdress.TabIndex = 14;
-            this.listAdress.UseCompatibleStateImageBehavior = false;
-            this.listAdress.SelectedIndexChanged += new System.EventHandler(this.listAdress_SelectedIndexChanged);
+            this.buttonTabort.Click += new System.EventHandler(this.buttonTabort_Click);
             // 
             // buttonSok
             // 
-            this.buttonSok.Location = new System.Drawing.Point(631, 248);
+            this.buttonSok.Location = new System.Drawing.Point(786, 247);
             this.buttonSok.Name = "buttonSok";
-            this.buttonSok.Size = new System.Drawing.Size(150, 46);
+            this.buttonSok.Size = new System.Drawing.Size(156, 46);
             this.buttonSok.TabIndex = 15;
             this.buttonSok.Text = "Sök";
             this.buttonSok.UseVisualStyleBackColor = true;
+            this.buttonSok.Click += new System.EventHandler(this.buttonSok_Click);
             // 
             // buttonSkapa
             // 
-            this.buttonSkapa.Location = new System.Drawing.Point(555, 930);
+            this.buttonSkapa.Location = new System.Drawing.Point(717, 930);
             this.buttonSkapa.Name = "buttonSkapa";
             this.buttonSkapa.Size = new System.Drawing.Size(225, 46);
             this.buttonSkapa.TabIndex = 16;
@@ -124,7 +117,7 @@ namespace Adressbok
             // 
             // buttonRensa
             // 
-            this.buttonRensa.Location = new System.Drawing.Point(452, 248);
+            this.buttonRensa.Location = new System.Drawing.Point(607, 247);
             this.buttonRensa.Name = "buttonRensa";
             this.buttonRensa.Size = new System.Drawing.Size(150, 46);
             this.buttonRensa.TabIndex = 17;
@@ -140,16 +133,25 @@ namespace Adressbok
             this.label1.TabIndex = 18;
             this.label1.Text = "Adressbok";
             // 
+            // listAdress
+            // 
+            this.listAdress.FormattingEnabled = true;
+            this.listAdress.ItemHeight = 32;
+            this.listAdress.Location = new System.Drawing.Point(28, 315);
+            this.listAdress.Name = "listAdress";
+            this.listAdress.Size = new System.Drawing.Size(914, 580);
+            this.listAdress.TabIndex = 19;
+            // 
             // frmAdressbok
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(885, 1068);
+            this.ClientSize = new System.Drawing.Size(990, 1051);
+            this.Controls.Add(this.listAdress);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonRensa);
             this.Controls.Add(this.buttonSkapa);
             this.Controls.Add(this.buttonSok);
-            this.Controls.Add(this.listAdress);
             this.Controls.Add(this.buttonTabort);
             this.Controls.Add(this.buttonAndra);
             this.Controls.Add(this.textBoxPostort);
@@ -171,12 +173,12 @@ namespace Adressbok
         private System.Windows.Forms.TextBox textBoxPostort;
         private System.Windows.Forms.Button buttonAndra;
         private System.Windows.Forms.Button buttonTabort;
-        private System.Windows.Forms.ListView listAdress;
         private System.Windows.Forms.Button buttonSok;
         private System.Windows.Forms.Button buttonSkapa;
         private System.Windows.Forms.Button buttonRensa;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.ListBox listAdress;
     }
 }
 

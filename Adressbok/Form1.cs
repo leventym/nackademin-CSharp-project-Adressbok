@@ -1,41 +1,118 @@
 ﻿using Microsoft.VisualBasic;
+using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Adressbok
 {
     public partial class frmAdressbok : Form
     {
+        private List<string> minAdressbok = new List<string>();
+
         public frmAdressbok()
         {
             InitializeComponent();
             loadFromFile();
+            updateListBox();
+
         }
 
+        //Load funktion som uppdaterar/läser in filen Adressbok.txt
         private void loadFromFile()
         {
-            string[] minAdressbok = File.ReadAllLines("Adressbok.txt");
-
-            //rensa listview
-            //lägg till från array till listview - loopa med en for each
+            this.minAdressbok = File.ReadAllLines("Adressbok.txt").ToList(); 
         }
 
+        //Funktionen uppdaterar vyn/textboxen
+        private void updateListBox()
+        {
+            listAdress.Items.Clear();
+            foreach (var rad in minAdressbok)
+            {
+                listAdress.Items.Add(rad);
+            }
+        }
 
         private void buttonSkapa_Click(object sender, EventArgs e)
         {
-            
+            //Skapar ny kontakt med dialogruta.
             Person newPerson = Prompt.ShowDialog("Skriv in uppgifter: ", "Skapa ny kontakt");
-            File.AppendAllText("Adressbok.txt", newPerson.ToString());
 
+            //Lägg till newPerson i minAdressbok
+            minAdressbok.Add(newPerson.ToString());
+           
+            //Skriver över hela listan med adressbok till textfilen adressbok.
+            File.WriteAllLines("Adressbok.txt", minAdressbok);
 
-            MessageBox.Show(newPerson.ToString());
+            //Om kontaktformuläret är tomt stängs rutan. Annars visas dialogruta med vilka uppgifter som är inmatade.
+            if(newPerson.Namn != "" || 
+                newPerson.Gatuadress != "" || 
+                newPerson.Postnummer != "" || 
+                newPerson.Postort != "" || 
+                newPerson.Telefon != "" || 
+                newPerson.Epost != "")
+            {
+                MessageBox.Show(newPerson.ToString());
+            }
+
+            updateListBox();
 
         }
 
-        private void listAdress_SelectedIndexChanged(object sender, EventArgs e)
+        private void Delete()
         {
+         
+            if(MessageBox.Show("Vill du radera?", "Radera", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                //Hämtar indexnumret från listAdress som ska raderas
+                int toBeRemoved = listAdress.SelectedIndex;
 
+                //Raderar rad från listAdress
+                listAdress.Items.RemoveAt(toBeRemoved);
+
+                //raderar rad/kontakt från textfilen
+                minAdressbok.RemoveAt(toBeRemoved);
+
+                //Skriver över hela listan med adressbok till textfilen adressbok.
+                File.WriteAllLines("Adressbok.txt", minAdressbok);
+            }
+        }
+        private void buttonTabort_Click(object sender, EventArgs e)
+        {
+            Delete();
+        }
+
+        private void buttonAndra_Click(object sender, EventArgs e)
+        {
+            //Hämtar indexnumret från listAdress som ska redigeras
+            int toBeEdited = listAdress.SelectedIndex;
+
+            //Hämtar kontaktraden o lägger in en variabel
+            string editedPost = minAdressbok[toBeEdited];
+
+            //lägger in kontaktraden i en array
+            string[] editedPostArr = editedPost.Split(' ');
+
+            //Spara redigerade värden
+            Person editedPerson = Prompt.ShowDialogEdit(editedPostArr[0], editedPostArr[1], editedPostArr[2], 
+                editedPostArr[3], editedPostArr[4], editedPostArr[5]);
+
+            //Tillderar listan minAdressbok den nya redigerade kontakten i en specifik position.
+            minAdressbok[toBeEdited] = editedPerson.ToString();
+
+            //Skriver över hela listan med adressbok till textfilen adressbok.
+            File.WriteAllLines("Adressbok.txt", minAdressbok);
+
+            //Uppdaterade personen tilldelas till listvyn == listvyn uppdateras. 
+            listAdress.Items[toBeEdited] = editedPerson.ToString();
+        }
+
+        private void buttonSok_Click(object sender, EventArgs e)
+        {
+            string toBeSearched = textBoxNamn.Text;
+            minAdressbok.Find
         }
     }
 }
