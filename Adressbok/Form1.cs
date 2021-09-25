@@ -4,19 +4,20 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Linq;
+using System.Text;
 
 namespace Adressbok
 {
     public partial class frmAdressbok : Form
     {
         private List<string> minAdressbok = new List<string>();
-
+        
         public frmAdressbok()
         {
             InitializeComponent();
             loadFromFile();
             updateListBox();
-
+            
         }
 
         //Load funktion som uppdaterar/läser in filen Adressbok.txt
@@ -111,8 +112,45 @@ namespace Adressbok
 
         private void buttonSok_Click(object sender, EventArgs e)
         {
-            string toBeSearched = textBoxNamn.Text;
-            minAdressbok.Find
+            //Loopar igenom lisboxen listAdress 'bakifrån' (-1)
+            //Kollar om värdet i textboxen finns i listboxen
+            //Om den finns markeras den.
+            //De som inte matchas tas bort från listboxen
+
+            for (int i = listAdress.Items.Count - 1; i >= 0; i--)
+            {
+                if (listAdress.Items[i].ToString().Contains(textBoxNamn.Text))
+                {
+                    listAdress.SetSelected(i, true);
+                }
+                else
+                {
+                    listAdress.Items.RemoveAt(i);
+                }
+            }
+
+            for (int i = listAdress.Items.Count - 1; i >= 0; i--)
+            {
+                if (listAdress.Items[i].ToString().Contains(textBoxPostort.Text))
+                {
+                    listAdress.SetSelected(i, true);
+                }
+                else
+                {
+                    listAdress.Items.RemoveAt(i);
+                }
+            }
+        }
+
+        private void buttonRensa_Click(object sender, EventArgs e)
+        {
+            //När rensa knappen trycks tas värden i textboxarna bort
+            //Sedan uppdateras listboxen tillbaka till original listan
+            textBoxNamn.Text = "";
+            textBoxPostort.Text = "";
+            updateListBox();
         }
     }
 }
+
+

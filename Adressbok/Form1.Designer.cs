@@ -123,15 +123,17 @@ namespace Adressbok
             this.buttonRensa.TabIndex = 17;
             this.buttonRensa.Text = "Rensa";
             this.buttonRensa.UseVisualStyleBackColor = true;
+            this.buttonRensa.Click += new System.EventHandler(this.buttonRensa_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(33, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 32);
+            this.label1.Size = new System.Drawing.Size(346, 50);
             this.label1.TabIndex = 18;
-            this.label1.Text = "Adressbok";
+            this.label1.Text = "Levents Adressbok";
             // 
             // listAdress
             // 
@@ -139,6 +141,7 @@ namespace Adressbok
             this.listAdress.ItemHeight = 32;
             this.listAdress.Location = new System.Drawing.Point(28, 315);
             this.listAdress.Name = "listAdress";
+            this.listAdress.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listAdress.Size = new System.Drawing.Size(914, 580);
             this.listAdress.TabIndex = 19;
             // 
@@ -159,6 +162,7 @@ namespace Adressbok
             this.Controls.Add(this.labelPostort);
             this.Controls.Add(this.labelNamn);
             this.Name = "frmAdressbok";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Adressbok";
             this.ResumeLayout(false);
             this.PerformLayout();
