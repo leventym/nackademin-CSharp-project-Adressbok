@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Adressbok
 {
+    //Person klassen
     public class Person
     { 
+        //Medlemsvariabler
         public string Namn { get; set; }
         public string Gatuadress { get; set; }
         public string Postnummer { get; set; }
@@ -14,6 +16,7 @@ namespace Adressbok
         public string Epost { get; set; }
 
 
+        //Inparametrar till Person klassen
         public Person(string namn = "", string gatuadress = "", string postnummer ="", 
             string postort ="", string telefon ="", string epost ="")
         {

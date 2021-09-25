@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualBasic;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Linq;
-using System.Text;
+
 
 namespace Adressbok
 {

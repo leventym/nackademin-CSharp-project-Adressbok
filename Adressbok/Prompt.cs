@@ -1,55 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Adressbok
 {
+    //Prompt klass (skapa ny kontakt rutan)
     class Prompt
     {
-        //Skapa ny kontakt
+        //Skapa ny kontakt dialogen
         public static Person ShowDialog(string text, string caption)
         {
+            //Skapar en ny instans av klassen Person med variabel namnet person
             Person person = new Person();
 
+            //Skapar en ny instans av formuläret prompt med fast storlek
             Form prompt = new Form();
             prompt.Width = 600;
             prompt.Height = 800;
             prompt.Text = caption;
 
-            //Namn label
+            //Namn label med fasta värden av textrutan
             TextBox inputNamn = new TextBox() { Left = 55, Top = 50, Width = 400 };
             inputNamn.PlaceholderText = "Namn";
 
-            //Gatuadress label
+            //Gatuadress label med fasta värden av textrutan
             TextBox inputGatuadress = new TextBox() { Left = 55, Top = 150, Width = 400 };
             inputGatuadress.PlaceholderText = "Gatuadress";
 
-            //Postnummer label
+            //Postnummer label med fasta värden av textrutan
             TextBox inputPostnummer = new TextBox() { Left = 55, Top = 250, Width = 400 };
             inputPostnummer.PlaceholderText = "Postnummer";
 
-            //Postort label
+            //Postort label med fasta värden av textrutan
             TextBox inputPostort = new TextBox() { Left = 55, Top = 350, Width = 400 };
             inputPostort.PlaceholderText = "Postort";
 
-            //Telefon label
+            //Telefon label med fasta värden av textrutan
             TextBox inputTelefon = new TextBox() { Left = 55, Top = 450, Width = 400 };
             inputTelefon.PlaceholderText = "Telefon";
 
-            //Epost label
+            //Epost label med fasta värden av textrutan
             TextBox inputEpost = new TextBox() { Left = 55, Top = 550, Width = 400 };
             inputEpost.PlaceholderText = "Epost";
 
-
+            //Skapar ny instans av knapp funktionen med texten Spara och fasta värden
             Button confirmation = new Button() { Text = "Spara", Left = 350, Height = 60, Width = 100, Top = 620 };
             confirmation.Click += (sender, e) => { prompt.Close(); };
             prompt.Controls.Add(confirmation);
 
+            
+            //Skapar ny instans av knapp funktionen med texten Avsbryt och fasta värden
             Button cancellation = new Button() { Text = "Avbryt", Left = 200, Height = 60, Width = 100, Top = 620 };
-            confirmation.Click += (sender, e) => { prompt.Close(); };
+            cancellation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(cancellation);
+
+
 
 
             //Namn
@@ -72,9 +75,11 @@ namespace Adressbok
 
             prompt.ShowDialog();
 
+            
+
             //Tilldelar inputvärdet från formuläret till objektet person.
             //Om inputvärdet är tomt får fältet bindestreck "-".
-            if(inputNamn.Text == "")
+            if (inputNamn.Text == "")
             {
                 person.Namn = "-";
             }
@@ -130,6 +135,13 @@ namespace Adressbok
 
             return person;
         }
+
+
+
+
+
+
+
 
         //Redigera existerande kontakt
         public static Person ShowDialogEdit(string namn, string gatuadress, string postnummer,
