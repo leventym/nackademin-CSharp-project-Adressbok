@@ -34,5 +34,17 @@ namespace Adressbok
             string nyKontakt = Namn + " " + Gatuadress + " " + Postnummer + " " + Postort + " " + Telefon + " " + Epost;
             return nyKontakt;
         }
+
+        public bool IsEmpty()
+        {
+            if(this.Namn == "-")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

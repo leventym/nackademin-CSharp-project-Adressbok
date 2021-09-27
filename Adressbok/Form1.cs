@@ -65,7 +65,7 @@ namespace Adressbok
 
             //Lägg till newPerson i minAdressbok
             //Om inget ny person lägss till (avrbyt knappen trycks) hanteras det med en return
-            if(newPerson == null)
+            if(newPerson.IsEmpty())
             {
                 return;
             }
@@ -92,8 +92,14 @@ namespace Adressbok
 
         private void Delete()
         {
-         
-            if(MessageBox.Show("Vill du radera?", "Radera", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+
+            if (listAdress.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ingen kontakt är markerad.");
+                return;
+            }
+
+            if (MessageBox.Show("Vill du radera?", "Radera", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 //Hämtar indexnumret från listAdress som ska raderas
                 int toBeRemoved = listAdress.SelectedIndex;
@@ -116,6 +122,12 @@ namespace Adressbok
         private void buttonAndra_Click(object sender, EventArgs e)
         {
             //Hämtar indexnumret från listAdress som ska redigeras
+            if(listAdress.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ingen kontakt är markerad.");
+                return;
+            }
+
             int toBeEdited = listAdress.SelectedIndex;
 
             //Hämtar kontaktraden o lägger in en variabel
