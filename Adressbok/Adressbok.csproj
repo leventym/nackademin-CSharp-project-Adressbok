@@ -8,4 +8,8 @@
     <StartupObject />
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="27.1.1" />
+  </ItemGroup>
+
 </Project>

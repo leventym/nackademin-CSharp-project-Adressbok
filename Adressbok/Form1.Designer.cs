@@ -141,7 +141,6 @@ namespace Adressbok
             this.listAdress.ItemHeight = 32;
             this.listAdress.Location = new System.Drawing.Point(28, 315);
             this.listAdress.Name = "listAdress";
-            this.listAdress.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listAdress.Size = new System.Drawing.Size(914, 580);
             this.listAdress.TabIndex = 19;
             // 

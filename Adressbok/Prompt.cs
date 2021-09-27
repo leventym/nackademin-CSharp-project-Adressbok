@@ -17,6 +17,7 @@ namespace Adressbok
             prompt.Height = 800;
             prompt.Text = caption;
 
+
             //Namn label med fasta värden av textrutan
             TextBox inputNamn = new TextBox() { Left = 55, Top = 50, Width = 400 };
             inputNamn.PlaceholderText = "Namn";
@@ -47,10 +48,18 @@ namespace Adressbok
             prompt.Controls.Add(confirmation);
 
             
+            
+
             //Skapar ny instans av knapp funktionen med texten Avsbryt och fasta värden
             Button cancellation = new Button() { Text = "Avbryt", Left = 200, Height = 60, Width = 100, Top = 620 };
-            cancellation.Click += (sender, e) => { prompt.Close(); };
+
+            bool dialogCancelled = false;
+            cancellation.Click += (sender, e) => { dialogCancelled = true; prompt.Close(); };
             prompt.Controls.Add(cancellation);
+
+            prompt.ControlBox = false;
+           
+            
 
 
 
@@ -74,6 +83,11 @@ namespace Adressbok
             prompt.Controls.Add(inputEpost);
 
             prompt.ShowDialog();
+
+            if (dialogCancelled == true)
+            {
+                return null;
+            }
 
             
 
@@ -137,12 +151,6 @@ namespace Adressbok
         }
 
 
-
-
-
-
-
-
         //Redigera existerande kontakt
         public static Person ShowDialogEdit(string namn, string gatuadress, string postnummer,
             string postort, string telefon, string epost)
@@ -192,7 +200,8 @@ namespace Adressbok
             prompt.Controls.Add(confirmation);
 
             Button cancellation = new Button() { Text = "Avbryt", Left = 200, Height = 60, Width = 100, Top = 620 };
-            cancellation.Click += (sender, e) => { prompt.Dispose(); };
+            bool dialogCancelled = false;
+            cancellation.Click += (sender, e) => { dialogCancelled = true; prompt.Dispose(); };
             prompt.Controls.Add(cancellation);
 
 
@@ -215,6 +224,10 @@ namespace Adressbok
             prompt.Controls.Add(inputEpost);
 
             prompt.ShowDialog();
+            if (dialogCancelled == true)
+            {
+                return null;
+            }
 
             //Tilldelar inputvärdet från formuläret till objektet person
             person.Namn = inputNamn.Text;
